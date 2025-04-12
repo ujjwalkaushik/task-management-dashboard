@@ -1,0 +1,46 @@
+<div class="modal-backdrop" (click)="close()" *ngIf="isVisible">
+    <div class="modal-content" @modalAnimation (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="close()"><i class="fa fa-times-circle"></i></button>
+        <ng-content></ng-content>
+        <div class="modal-heading">
+            <span *ngIf="!isEditFlow">Add a new task</span>
+            <span *ngIf="isEditFlow">Update your task</span>
+        </div>
+        <div>
+            <form [formGroup]="taskForm" class="form-container" (ngSubmit)="onSaveTask()">
+                <div class="input-container">
+                    <label class="form-label">Title:</label>
+                    <input type="text" formControlName="title"  class="form-control" />
+                    <span style="color: red;" *ngIf="taskForm.controls['title'].touched && taskForm.controls['title'].invalid" >
+                        title is mandatory
+                    </span>
+                </div>
+                <div class="input-container">
+                    <label class="form-label">Description</label>
+                    <textarea id="description" formControlName="description" class="form-control custom-input" rows="4"
+                    maxlength="60">
+                    </textarea>
+                </div>
+                <div class="input-container">
+                    <label class="form-label">Due Date:</label>
+                    <input type="date" formControlName="dueDate" class="form-control"  [min]="minDate" />
+                    <span style="color: red;" *ngIf="taskForm.controls['dueDate'].touched && taskForm.controls['dueDate'].invalid" >
+                        due date is mandatory
+                    </span>
+                </div>
+                <div class="input-container">
+                    <label class="form-label">Status</label>
+                    <select class="form-control" formControlName="status">
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; justify-content: center;align-items: center;">
+                    <button class="save-button" [disabled]="taskForm.invalid" type="submit">{{isEditFlow ? 'Update' : 'Save'}} Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

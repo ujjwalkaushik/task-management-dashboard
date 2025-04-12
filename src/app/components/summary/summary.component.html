@@ -1,0 +1,7 @@
+<div class="summary-bar" *ngIf="summary && status == 'all'">
+  <div *ngFor="let item of summaryItems">
+    <span class="summary-chip {{item.class}}" (click)="onFilerSelection(item.key, item.getCount(summary))">
+      {{ item.label }}: {{ item.getCount(summary) }}
+    </span>
+  </div>
+</div>

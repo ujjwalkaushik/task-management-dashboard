@@ -1,0 +1,22 @@
+<div class="task-item card highlight-card card-small">
+    <div class="task-prop">
+        <span *ngIf="isMobile" class="heading">Title: </span>
+        <span>{{task?.title}}</span>
+    </div>
+    <div class="task-prop">
+        <span *ngIf="isMobile" class="heading">Due Date: </span>
+        <span>{{task?.dueDate}}</span>
+    </div>
+    <div class="task-prop">
+        <span *ngIf="isMobile" class="heading">Description: </span>
+        <span>{{task?.description}}</span>
+    </div>
+    <div class="task-prop text-align-end">
+        <span *ngIf="isMobile" class="heading">Status: </span>
+        <span>{{task?.status}}</span>
+    </div>
+    <div class="icon-container">
+        <i class="task-icon c-warning  fas fa-trash-alt" (click)="deleteTask(task)"></i>
+        <i class="task-icon c-orange fas fa-edit" (click)="editTask(task)"></i>
+    </div>
+</div>

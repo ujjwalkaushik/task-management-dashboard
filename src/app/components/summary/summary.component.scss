@@ -1,0 +1,52 @@
+.summary-chip {
+    background-color: burlywood;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.in-progress {
+    background-color: lightgreen;
+}
+
+.completed {
+    background-color: green;
+}
+
+.summary-bar {
+    display: flex;
+    flex-direction: row;
+    width: 55vw;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .summary-bar > div {
+    min-width: 20%;
+  }
+  
+  @media screen and (max-width: 950px) {
+    .summary-bar {
+      flex-direction: column;
+      width: 90vw;
+      padding: 1rem;
+      align-items: flex-start;
+      row-gap: 1rem;
+    }
+  
+    .summary-bar > div {
+      width: 100%;
+    }
+  
+    .summary-chip {
+      font-size: 14px;
+      padding: 0.5rem 0.75rem;
+      display: block;
+      width: 95%;
+    }
+  }
+  

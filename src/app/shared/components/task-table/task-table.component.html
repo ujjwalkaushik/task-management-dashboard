@@ -1,0 +1,50 @@
+<app-summary [status]="status"  (filterSelection)="onFilterSelection($event)" *ngIf="taskList.length"></app-summary>
+
+<div class="task-item-container" *ngIf="taskList.length">
+    <div class="task-item card highlight-card card-small font-bold" *ngIf="!isMobile">
+        <div class="width-25">
+            <span>Title</span>
+        </div>
+        <div class="width-25">
+            <span>Due Date</span>
+            <i class="margin-l-1 fa-solid" *ngIf="taskList.length > 1" [ngClass]="{ 
+            'fa-arrow-up': sortKey === 'dueDate' && sortDirection === 'asc',
+            'fa-arrow-down': sortKey === 'dueDate' && sortDirection === 'desc',
+            'fa-sort': sortKey !== 'dueDate',
+            'selected': sortKey === 'dueDate'
+            }" (click)="onSort('dueDate')"></i>
+        </div>
+        <div class="width-25">
+            <span>Description</span>
+        </div>
+        <div class="width-25 text-align-end">
+            <span>Status</span>
+            <i class="margin-l-1 fa-solid" *ngIf="taskList.length > 1" [ngClass]="{ 
+            'fa-arrow-up': sortKey === 'status' && sortDirection === 'asc',
+            'fa-arrow-down': sortKey === 'status' && sortDirection === 'desc',
+            'fa-sort': sortKey !== 'status',
+            'selected': sortKey === 'status'
+            }" (click)="onSort('status')"></i>
+        </div>
+    </div>
+    <div *ngFor="let task of taskList">
+        <app-task-item [task]="task" [isMobile]="isMobile" (onEdit)="onEditTask($event)"
+        (onDelete)="onDeleteTask($event)"></app-task-item>
+    </div>
+</div>
+
+<div *ngIf="!taskList.length" class="no-task">
+    <div>
+      <span>
+        {{ status === 'Completed' ? 'No Completed Task Found!!' : 'No Task Found!!' }}
+      </span>
+    </div>
+    <div>
+      <button
+        class="task-action-button"
+        (click)="status === 'Completed' ? completeYourTask() : onAddNewTask()"
+      >
+        {{ status === 'Completed' ? 'Complete any task' : 'Add a new task' }}
+      </button>
+    </div>
+  </div>
